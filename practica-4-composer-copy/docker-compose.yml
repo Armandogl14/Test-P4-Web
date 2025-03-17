@@ -78,8 +78,8 @@ services:
       - "443:443"
     volumes:
       - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
-      - /etc/letsencrypt/live/tu_dominio/fullchain.pem:/etc/haproxy/certs/fullchain.pem
-      - /etc/letsencrypt/live/tu_dominio/privkey.pem:/etc/haproxy/certs/privkey.pem
+      - /etc/letsencrypt/live/agonzalez.me.turnos.do/fullchain.pem:/etc/haproxy/certs/fullchain.pem
+      - /etc/letsencrypt/live/agonzalez.me.turnos.do/privkey.pem:/etc/haproxy/certs/privkey.pem
     depends_on:
       - app1
       - app2
