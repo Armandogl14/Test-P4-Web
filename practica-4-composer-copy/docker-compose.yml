@@ -81,6 +81,7 @@ services:
       - /etc/letsencrypt/live/ajgonzalez.turnos.do:/etc/letsencrypt/live/ajgonzalez.turnos.do
       - /etc/letsencrypt/archive/ajgonzalez.turnos.do:/etc/letsencrypt/archive/ajgonzalez.turnos.do
       - /etc/letsencrypt/renewal/ajgonzalez.turnos.do.conf:/etc/letsencrypt/renewal/ajgonzalez.turnos.do.conf
+    user: root
     entrypoint: >
       sh -c "chown -R haproxy:haproxy /etc/letsencrypt/live /etc/letsencrypt/archive /etc/letsencrypt/renewal &&
              chmod -R 750 /etc/letsencrypt/live /etc/letsencrypt/archive &&
