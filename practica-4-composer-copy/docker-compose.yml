@@ -1,15 +1,47 @@
+version: "3.8"
+
 services:
-  app:
+  app1:
     build: .
-    container_name: mockup-api
+    container_name: mockup-api-01
     ports:
-      - "${PORT:-8080}:8080"
+      - "8080:8080"
     environment:
       - SPRING_DATASOURCE_URL=${SPRING_DATASOURCE_URL}
       - SPRING_DATASOURCE_USERNAME=${SPRING_DATASOURCE_USERNAME}
       - SPRING_DATASOURCE_PASSWORD=${SPRING_DATASOURCE_PASSWORD}
     depends_on:
       - db
+    networks:
+      - backend
+
+  app2:
+    build: .
+    container_name: mockup-api-02
+    ports:
+      - "8081:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=${SPRING_DATASOURCE_URL}
+      - SPRING_DATASOURCE_USERNAME=${SPRING_DATASOURCE_USERNAME}
+      - SPRING_DATASOURCE_PASSWORD=${SPRING_DATASOURCE_PASSWORD}
+    depends_on:
+      - db
+    networks:
+      - backend
+
+  app3:
+    build: .
+    container_name: mockup-api-03
+    ports:
+      - "8082:8080"
+    environment:
+      - SPRING_DATASOURCE_URL=${SPRING_DATASOURCE_URL}
+      - SPRING_DATASOURCE_USERNAME=${SPRING_DATASOURCE_USERNAME}
+      - SPRING_DATASOURCE_PASSWORD=${SPRING_DATASOURCE_PASSWORD}
+    depends_on:
+      - db
+    networks:
+      - backend
 
   db:
     image: postgres:15-alpine
@@ -22,6 +54,8 @@ services:
       - ${DB_VOLUME_PATH}:/var/lib/postgresql/data
     expose:
       - "5432"
+    networks:
+      - backend
 
   pgadmin:
     image: dpage/pgadmin4
@@ -33,3 +67,26 @@ services:
       - "${PGADMIN_PORT:-8082}:80"
     depends_on:
       - db
+    networks:
+      - backend
+
+  haproxy:
+    image: haproxy:latest
+    container_name: mockup-haproxy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
+      - /etc/letsencrypt/live/tu_dominio/fullchain.pem:/etc/haproxy/certs/fullchain.pem
+      - /etc/letsencrypt/live/tu_dominio/privkey.pem:/etc/haproxy/certs/privkey.pem
+    depends_on:
+      - app-01
+      - app-02
+      - app-03
+    networks:
+      - backend
+
+networks:
+  backend:
+    driver: bridge
