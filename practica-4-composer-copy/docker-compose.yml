@@ -78,9 +78,9 @@ services:
       - "443:443"
     volumes:
       - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
-      - /etc/letsencrypt/live/agonzalez.me.turnos.do:/etc/letsencrypt/live/agonzalez.me.turnos.do
-      - /etc/letsencrypt/archive/agonzalez.me.turnos.do:/etc/letsencrypt/archive/agonzalez.me.turnos.do
-      - /etc/letsencrypt/renewal/agonzalez.me.turnos.do.conf:/etc/letsencrypt/renewal/agonzalez.me.turnos.do.conf
+      - /etc/letsencrypt/live/ajgonzalez.turnos.do:/etc/letsencrypt/live/ajgonzalez.turnos.do
+      - /etc/letsencrypt/archive/ajgonzalez.turnos.do:/etc/letsencrypt/archive/ajgonzalez.turnos.do
+      - /etc/letsencrypt/renewal/ajgonzalez.turnos.do.conf:/etc/letsencrypt/renewal/ajgonzalez.turnos.do.conf
     entrypoint: >
       sh -c "chown -R haproxy:haproxy /etc/letsencrypt/live /etc/letsencrypt/archive /etc/letsencrypt/renewal &&
              chmod -R 750 /etc/letsencrypt/live /etc/letsencrypt/archive &&
