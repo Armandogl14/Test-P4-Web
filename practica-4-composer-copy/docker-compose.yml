@@ -71,26 +71,26 @@ services:
       - backend
 
   haproxy:
-  image: haproxy:latest
-  container_name: mockup-haproxy
-  ports:
-    - "80:80"
-    - "443:443"
-  volumes:
-    - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
-    - /etc/letsencrypt/live/agonzalez.me.turnos.do:/etc/letsencrypt/live/agonzalez.me.turnos.do
-    - /etc/letsencrypt/archive/agonzalez.me.turnos.do:/etc/letsencrypt/archive/agonzalez.me.turnos.do
-    - /etc/letsencrypt/renewal/agonzalez.me.turnos.do.conf:/etc/letsencrypt/renewal/agonzalez.me.turnos.do.conf
-  entrypoint: >
-    sh -c "chown -R haproxy:haproxy /etc/letsencrypt/live /etc/letsencrypt/archive /etc/letsencrypt/renewal &&
-           chmod -R 750 /etc/letsencrypt/live /etc/letsencrypt/archive &&
-           exec /docker-entrypoint.sh"
-  depends_on:
-    - app1
-    - app2
-    - app3
-  networks:
-    - backend
+    image: haproxy:latest
+    container_name: mockup-haproxy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
+      - /etc/letsencrypt/live/agonzalez.me.turnos.do:/etc/letsencrypt/live/agonzalez.me.turnos.do
+      - /etc/letsencrypt/archive/agonzalez.me.turnos.do:/etc/letsencrypt/archive/agonzalez.me.turnos.do
+      - /etc/letsencrypt/renewal/agonzalez.me.turnos.do.conf:/etc/letsencrypt/renewal/agonzalez.me.turnos.do.conf
+    entrypoint: >
+      sh -c "chown -R haproxy:haproxy /etc/letsencrypt/live /etc/letsencrypt/archive /etc/letsencrypt/renewal &&
+             chmod -R 750 /etc/letsencrypt/live /etc/letsencrypt/archive &&
+             exec /docker-entrypoint.sh"
+    depends_on:
+      - app1
+      - app2
+      - app3
+    networks:
+      - backend
 
 networks:
   backend:
