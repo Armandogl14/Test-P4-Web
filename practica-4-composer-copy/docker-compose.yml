@@ -81,9 +81,9 @@ services:
       - /etc/letsencrypt/live/tu_dominio/fullchain.pem:/etc/haproxy/certs/fullchain.pem
       - /etc/letsencrypt/live/tu_dominio/privkey.pem:/etc/haproxy/certs/privkey.pem
     depends_on:
-      - app-01
-      - app-02
-      - app-03
+      - app1
+      - app2
+      - app3
     networks:
       - backend
 
