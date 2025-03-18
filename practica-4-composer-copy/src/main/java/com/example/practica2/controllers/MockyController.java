@@ -39,7 +39,7 @@ public class MockyController {
             : mock.buscarTodoByUsuario(usuario));
       model.addAttribute("jwt", sjwt);
       model.addAttribute("url", getBaseUrl());
-      return "/thymeleaf/listar";
+      return "thymeleaf/listar";
    }
 
    private String getBaseUrl() {
@@ -49,7 +49,7 @@ public class MockyController {
    @GetMapping("/crear")
    public String crearmodel(Model model) {
       populateModelForCreateOrEdit(model, "crear", "/mockycrud/creacion", "GET", "200", "application/json");
-      return "/thymeleaf/crearEditarVisualizar";
+      return "thymeleaf/crearEditarVisualizar";
    }
 
    private void populateModelForCreateOrEdit(Model model, String tipo, String accion, String selectmet,
@@ -103,7 +103,7 @@ public class MockyController {
       model.addAttribute("titulo", "Tu Mocky");
       String baseUrl = getBaseUrl() + name + "/" + codigo + "?token=" + token;
       model.addAttribute("url", baseUrl);
-      return "/thymeleaf/showURL";
+      return "thymeleaf/showURL";
    }
 
    @PostMapping("/creacion")
@@ -194,6 +194,6 @@ public class MockyController {
       model.addAttribute("fheaders", mm.getHeaders());
       model.addAttribute("fbody", mm.getBody());
       model.addAttribute("selecdem", mm.getDemora());
-      return "/thymeleaf/crearEditarVisualizar";
+      return "thymeleaf/crearEditarVisualizar";
    }
 }
