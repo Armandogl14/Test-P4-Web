@@ -8,5 +8,6 @@ RUN gradle build --no-daemon -x test
 FROM eclipse-temurin:21-jre-alpine
 WORKDIR /app
 COPY --from=builder /app/build/libs/*.jar app.jar
+COPY src/main/resources/templates/ /app/templates/
 EXPOSE ${PORT:-8080}
 ENTRYPOINT ["java", "-jar", "app.jar"] 
