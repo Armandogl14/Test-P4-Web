@@ -8,6 +8,7 @@ RUN gradle build --no-daemon -x test
 FROM eclipse-temurin:21-jre-alpine
 WORKDIR /app
 COPY --from=builder /app/build/libs/*.jar app.jar
-COPY --from=builder /app/build/resources/main/templates/ /app/templates/
+# Asegúrate de que la estructura de directorios sea exactamente igual
+COPY --from=builder /app/build/resources/main/ /app/resources/
 EXPOSE ${PORT:-8080}
-ENTRYPOINT ["java", "-jar", "app.jar"] 
+ENTRYPOINT ["java", "-Dspring.resources.static-locations=file:/app/resources/static/", "-Dspring.thymeleaf.prefix=file:/app/resources/templates/", "-jar", "app.jar"]
