@@ -96,9 +96,9 @@ services:
       - "443:443"
     volumes:
       - ./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg
-      - /etc/letsencrypt/live/armandogl.turnos.do:/etc/letsencrypt/live/armandogl.turnos.do
-      - /etc/letsencrypt/archive/armandogl.turnos.do:/etc/letsencrypt/archive/armandogl.turnos.do
-      - /etc/letsencrypt/renewal/armandogl.turnos.do.conf:/etc/letsencrypt/renewal/armandogl.turnos.do.conf
+      - /etc/letsencrypt/live/armandojosegl.turnos.do:/etc/letsencrypt/live/armandojosegl.turnos.do
+      - /etc/letsencrypt/archive/armandojosegl.turnos.do:/etc/letsencrypt/archive/armandojosegl.turnos.do
+      - /etc/letsencrypt/renewal/armandojosegl.turnos.do.conf:/etc/letsencrypt/renewal/armandojosegl.turnos.do.conf
     user: root
     depends_on:
       - app1
